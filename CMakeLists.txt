@@ -10,4 +10,4 @@ include_directories( ${HEADER_FOLDER} )
 file(GLOB SOURCE_FILES ${SOURCE_FOLDER}/*.cpp )
 file(GLOB HEADER_FILES ${HEADER_FOLDER}/*.h )
 
-add_executable(statck_pimpl_test ${HEADER_FILES} ${SOURCE_FILES} )
+add_executable(stack_pimpl_test ${HEADER_FILES} ${SOURCE_FILES} )
