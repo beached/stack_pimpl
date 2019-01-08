@@ -22,16 +22,22 @@
 // SOFTWARE.
 
 #include "stack_pimpl.h"
+#include "pimpl.h"
 
 
 int main( ) {
+	// Stack PIMPL
 	daw::pub_t test{};
-
 	test.some_method( );
 	test.show( );
 	test.some_method( );
 	test.show( );
-
+	// PIMPL
+	daw::pimpl_pub_t test2{};
+	test2.some_method( );
+	test2.show( );
+	test2.some_method( );
+	test2.show( );
 	return 0;
 }
 

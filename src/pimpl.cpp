@@ -23,14 +23,43 @@
 
 #include <iostream>
 
-#include "private.h"
+#include "pimpl.h"
 
 namespace daw {
-	void pub_t::priv_t::some_method( pub_t *self ) {
-		self->state++;
+	struct pimpl_pub_t::priv_t {
+		int state = 0;
+
+		constexpr priv_t( ) noexcept = default;
+
+		constexpr void some_method( ) noexcept {
+			++state;
+		}
+
+		void show( ) const {
+			std::cout << state << '\n';
+		}
+	};
+
+	pimpl_pub_t::pimpl_pub_t( )
+	  : pimpl( std::make_unique<priv_t>( ) ) {}
+
+	pimpl_pub_t::~pimpl_pub_t( ) = default;
+
+	pimpl_pub_t::pimpl_pub_t( pimpl_pub_t const &other )
+	  : pimpl( std::make_unique<priv_t>( ) ) {}
+
+	pimpl_pub_t &pimpl_pub_t::operator=( pimpl_pub_t const &rhs ) {
+		if( this != &rhs ) {
+			*pimpl = *rhs.pimpl;
+		}
+		return *this;
 	}
 
-	void pub_t::priv_t::show( pub_t const *self ) {
-		std::cout << self->state << '\n';
+	void pimpl_pub_t::some_method( ) {
+		pimpl->some_method( );
+	}
+
+	void pimpl_pub_t::show( ) const {
+		pimpl->show( );
 	}
 } // namespace daw

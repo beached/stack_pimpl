@@ -23,15 +23,22 @@
 
 #pragma once
 
+#include <memory>
+
 namespace daw {
 
-	class pub_t {
+	class pimpl_pub_t {
 		struct priv_t;
-		friend pub_t::priv_t;
-
-		int m_state{};
+		
+		std::unique_ptr<priv_t> pimpl;
 	public:
-		constexpr pub_t( ) noexcept = default;
+		pimpl_pub_t( );
+		~pimpl_pub_t( );
+		pimpl_pub_t( pimpl_pub_t const & other );
+		pimpl_pub_t & operator=( pimpl_pub_t const & rhs );
+
+		pimpl_pub_t( pimpl_pub_t && ) noexcept = default;
+		pimpl_pub_t & operator=( pimpl_pub_t && ) noexcept = default;
 
 		void some_method( );
 		void show( ) const;
